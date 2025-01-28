@@ -1,4 +1,4 @@
-# itfquiz
+# aiquiz
 
 ## 仕様の検討
 1. 画面遷移
