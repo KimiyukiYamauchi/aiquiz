@@ -118,8 +118,14 @@ function displayQuestion(quiz) {
   questionElement.innerHTML = formatText(questionData.question);
   quizContainer.appendChild(questionElement);
 
+  // ランダムモードなら選択肢をシャッフル
+  let choices = [...questionData.choices];
+  if (currentMode === "ランダム") {
+    shuffleArray(choices);
+  }
+
   // 選択肢表示
-  questionData.choices.forEach((choice, index) => {
+  choices.forEach((choice, index) => {
     const label = document.createElement('label');
     label.style.display = 'block';
     
