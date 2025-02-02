@@ -118,6 +118,13 @@ function displayQuestion(quiz) {
   questionElement.innerHTML = formatText(questionData.question);
   quizContainer.appendChild(questionElement);
 
+  // 現在の問題番号をhidden inputで保持
+  const hiddenInput = document.createElement('input');
+  hiddenInput.type = 'hidden';
+  hiddenInput.id = 'question-number';
+  hiddenInput.value = questionData.questionNumber;
+  quizContainer.appendChild(hiddenInput);
+
   // ランダムモードなら選択肢をシャッフル
   let choices = [...questionData.choices];
   if (currentMode === "ランダム") {
