@@ -180,12 +180,10 @@ function handleAnswer(selectedButton, selectedChoice, correctAnswers, explanatio
 
   if (isCorrect) {
     feedbackElement.textContent = '正解！';
-    feedbackElement.style.color = 'green';
     score++;
     updateScoreDisplay();
   } else {
     feedbackElement.textContent = `不正解！正解は「${correctAnswers.join(', ')}」です。`;
-    feedbackElement.style.color = 'red';
     incorrectQuestions.push(quiz[currentQuestionIndex]);
   }
 
