@@ -132,34 +132,17 @@ function displayQuestion(quiz) {
   }
 
   // 選択肢表示
-  choices.forEach((choice, index) => {
-    const label = document.createElement('label');
-    label.style.display = 'block';
-    
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.value = choice;
-    checkbox.name = 'choice';
-    checkbox.id = `choice-${index}`;
-    
-    label.appendChild(checkbox);
-    label.appendChild(document.createTextNode(choice));
-    
-    quizContainer.appendChild(label);
+  questionData.choices.forEach(choice => {
+    const button = document.createElement('button');
+    button.textContent = choice;
+    button.classList.add('choice-button');
+
+    button.onclick = function () {
+      handleAnswer(this, choice, questionData.answer, questionData.explanation, quiz);
+    };
+
+    quizContainer.appendChild(button);
   });
-
-  // OKボタン(選択肢の確定処理)
-  const okButton = document.createElement('button');
-  okButton.id = 'ok-button';
-  okButton.textContent = 'OK';
-  okButton.style.marginTop = '20px';
-  quizContainer.appendChild(okButton);
-
-  okButton.onclick = () => {
-    // console.log(questionData);
-    handleAnswer(questionData.answer, questionData.explanation, quiz);
-    okButton.style.display = 'none'; // OKボタンを非表示
-  };
 
   // フィードバックエリア
   const feedbackElement = document.createElement('div');
@@ -175,17 +158,25 @@ function updateScoreDisplay() {
 }
 
 // 回答を処理
-function handleAnswer(correctAnswers, explanation, quiz) {
-  const selectedChoices = Array.from(document.querySelectorAll('input[name="choice"]:checked')).map(input => input.value);
+function handleAnswer(selectedButton, selectedChoice, correctAnswers, explanation, quiz) {
+  const selectedButtons = document.querySelectorAll('.choice-button.selected');
   const feedbackElement = document.getElementById('feedback');
   const nextButton = document.getElementById('next-question');
+  const buttons = document.querySelectorAll('.choice-button');
 
-  // 正答判定
-  const isCorrect = correctAnswers.every(answer => selectedChoices.includes(answer)) &&
-                    selectedChoices.every(choice => correctAnswers.includes(choice));
+  let isCorrect = correctAnswers.includes(selectedChoice);
 
-  // ボタンの無効化
-  document.querySelectorAll('input[name="choice"]').forEach(input => input.disabled = true);
+  // すべてのボタンを無効化
+  buttons.forEach(btn => {
+    btn.classList.add('disabled');
+    if (correctAnswers.includes(btn.textContent)) {
+      btn.classList.add('correct'); // 正解の選択肢を緑に
+    }
+  });
+
+  if (!isCorrect) {
+    selectedButton.classList.add('wrong'); // 不正解なら赤に
+  }
 
   if (isCorrect) {
     feedbackElement.textContent = '正解！';

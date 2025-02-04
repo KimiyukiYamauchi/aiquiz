@@ -144,3 +144,41 @@ th:nth-child(3), td:nth-child(3) {
   background-color: #0056b3; /* ホバー時の背景色: 濃い青 */
   color: #ffffff; /* 文字色: 白（変化なし） */
 }
+
+/* 選択肢のボタンスタイル */
+.choice-button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 16px;
+  text-align: left; /* 左寄せ */
+  cursor: pointer;
+  background-color: #ffffff; /* 初期背景 */
+  color: #333; /* 文字色 */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ホバー時の背景色 */
+.choice-button:hover {
+  background-color: #f0f0f0; /* うっすら灰色 */
+}
+
+/* クリック後、ホバーを無効化 */
+.choice-button.disabled {
+  pointer-events: none; /* クリック無効 */
+}
+
+/* ✅ 正解の選択肢 */
+.choice-button.correct {
+  background-color: #28a745 !important; /* 緑 */
+  color: #ffffff !important;
+}
+
+/* ❌ 不正解で選択された選択肢 */
+.choice-button.wrong {
+  background-color: #dc3545 !important; /* 赤 */
+  color: #ffffff !important;
+}
