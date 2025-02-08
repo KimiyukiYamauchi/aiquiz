@@ -127,7 +127,8 @@ th:nth-child(3), td:nth-child(3) {
 
 #chapter-selection button {
   display: block; /* ボタンを縦に並べる */
-  width: auto; /* ボタン幅を自動調整 */
+  width: 100%; /* 一度100%にしてベースを調整 */
+  max-width: 500px; /* 固定幅として設定 */
   margin: 10px 0; /* ボタン間の余白 */
   padding: 10px;
   font-size: 16px;
