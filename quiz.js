@@ -127,12 +127,14 @@ function displayQuestion(quiz) {
 
   // ランダムモードなら選択肢をシャッフル
   let choices = [...questionData.choices];
-  if (currentMode === "ランダム") {
-    shuffleArray(choices);
-  }
+  // if (currentMode === "ランダム") {
+  //   shuffleArray(choices);
+  // }
+  // 選択肢をシャッフル
+  shuffleArray(choices);
 
   // 選択肢表示
-  questionData.choices.forEach(choice => {
+  choices.forEach(choice => {
     const button = document.createElement('button');
     button.textContent = choice;
     button.classList.add('choice-button');
