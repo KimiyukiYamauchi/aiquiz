@@ -146,6 +146,17 @@ th:nth-child(3), td:nth-child(3) {
   color: #ffffff; /* 文字色: 白（変化なし） */
 }
 
+
+#chapter-selection button:last-child {
+  background-color: #28a745; /* 緑色 */
+  color: #ffffff;
+  font-weight: bold;
+}
+
+#chapter-selection button:last-child:hover {
+  background-color: #1e7e34; /* 濃い緑色 */
+}
+
 /* 選択肢のボタンスタイル */
 .choice-button {
   display: block;

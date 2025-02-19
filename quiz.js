@@ -35,6 +35,12 @@ async function generateChapterOptions() {
     buttonsContainer.appendChild(button);
   });
 
+  // 「すべての問題」ボタンを追加
+  const allButton = document.createElement('button');
+  allButton.textContent = 'all すべての問題';
+  allButton.onclick = () => showModeSelection(quizData, 'all');
+  buttonsContainer.appendChild(allButton);
+
   chapterSelectionContainer.appendChild(buttonsContainer);
 }
 
@@ -75,8 +81,14 @@ function startQuiz(quiz) {
 
 // モードに応じて問題を出題 
 function startQuizForChapter(quizData, chapter, isRandom) {
-  const filteredQuiz = quizData.filter(item => item.chapter === chapter);
+  let filteredQuiz;
   const mode = isRandom ? 'ランダム' : '通常';
+
+  if (chapter === 'all') {
+    filteredQuiz = quizData; // すべての問題を取得
+  } else {
+    filteredQuiz = quizData.filter(item => item.chapter === chapter); // 章ごとに取得
+  }
 
   // チャプターとモードを表示
   updateChapterModeDisplay(chapter, mode);
